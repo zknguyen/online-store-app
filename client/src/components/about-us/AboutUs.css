@@ -1,0 +1,33 @@
+#container-1 {
+    color: #FFFFFF;
+    height: 100vh;
+    padding: 50px;
+    position: relative;
+    background-image: url('/about-us/bw-outfit-new-york.jpg');
+    background-size: 100%;
+    overflow: hidden;
+}
+
+#container-1-text {
+    width: 40%;
+    position: absolute;
+    top: 25%;
+}
+
+#container-1-description {
+    font-size: 18px;
+}
+
+#container-1-button {
+    height: 50px;
+    width: 150px;
+    border-radius: 25px;
+    margin-bottom: auto;
+    position: absolute;
+    bottom: 50%;
+}
+
+#container-1-button:hover {
+    cursor: pointer;
+    transform: scale(1.02);
+}

@@ -1,0 +1,71 @@
+/* General */
+.log-in-out-button {
+    color: #FFFFFF;
+    background-color: #000000;
+    margin: 20px 0;
+    width: 150px;
+    height: 40px;
+    border-radius: 20px;
+    font-size: 18px;
+}
+
+.log-in-out-button:hover {
+    cursor: pointer;
+    background-color: #484848;
+}
+
+/* Not authenticated */
+#login-page {
+    padding: 40px 10%;
+}
+
+input {
+    margin: 5px 0;
+}
+
+.hidden {
+    display: none;
+}
+
+#create-user-hyperlink {
+    text-decoration: underline;
+}
+
+#create-user-hyperlink:hover {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+/* Authenticated */
+#grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.detail-container {
+    background-color: #E5E5E5;
+    padding: 30px 15px;
+    border-radius: 10px;
+}
+
+.detail-container-header {
+    margin-bottom: 15px;
+}
+
+#account-details {
+    grid-row: 1 / 3;
+}
+
+.field-header {
+    color: #808080;
+    font-weight: normal;
+}
+
+.field-entry {
+    margin-bottom: 5px;
+}
+
+#collection-details {
+    grid-column: 1 /3;
+}
