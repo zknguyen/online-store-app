@@ -12,6 +12,7 @@ function CreateUser() {
             email: document.getElementById("email").value,
             password: document.getElementById("password").value,
         };
+        // TODO: handle any errors
         await auth.createUserAction(data);
     }
 

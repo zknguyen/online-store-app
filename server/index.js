@@ -109,7 +109,20 @@ app.post("/create-user", (req, res) => {
     `
     db.query(queryString, (err, data) => {
         if (err) return res.json(err);
-        return res.json(data);
+        // return res.json(data);
+    });
+
+    const queryString2 = `
+        SELECT usersid FROM users
+        WHERE firstname = '${req.body.firstname}'
+        AND lastname = '${req.body.lastname}'
+        AND email = '${req.body.email}'
+        AND password = '${req.body.password}'
+        LIMIT 1;
+    `
+    db.query(queryString2, (err, data) => {
+        if (err) return res.json(err);
+        return res.json(data[0]);
     });
 });
 

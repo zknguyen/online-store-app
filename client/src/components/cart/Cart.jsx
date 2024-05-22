@@ -1,45 +1,37 @@
-import { useState, useEffect } from 'react';
+// import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useShop } from '../../contexts/shop/ShoppingCartContext';
 import CartItem from './CartItem';
 import './Cart.css'
 
 
-const sum = (items) => {
-    return items.reduce(
-        (accumulator, currentItem) => accumulator + (currentItem.product.price * currentItem.quantity),
-        0
-    )
-}
-
 function Cart() {
     const shop = useShop();
-    const [subtotal, setSubtotal] = useState(1)
-    const [tax, setTax] = useState(subtotal * 0.1)
-    const [total, setTotal] = useState(subtotal + tax);
+    // const [subtotal, setSubtotal] = useState(1)
+    // const [tax, setTax] = useState(subtotal * 0.1)
+    // const [total, setTotal] = useState(subtotal + tax);
     const navigate = useNavigate();
 
+    // const setTotals = (cartItems) => {
+    //     const updatedSubtotal = sum(cartItems);
+    //     const updatedTax = updatedSubtotal * 0.1;
+    //     const updatedTotal = updatedSubtotal + updatedTax;
 
-    const setTotals = (cartItems) => {
-        const updatedSubtotal = sum(cartItems);
-        const updatedTax = updatedSubtotal * 0.1;
-        const updatedTotal = updatedSubtotal + updatedTax;
-
-        setSubtotal(updatedSubtotal);
-        setTax(updatedTax);
-        setTotal(updatedTotal);
-    }
+    //     setSubtotal(updatedSubtotal);
+    //     setTax(updatedTax);
+    //     setTotal(updatedTotal);
+    // }
 
     // Updates totals when cart item is removed / added
-    useEffect(() => {
-        setTotals(shop.cartItems);
-    }, [shop.cartItems]);
+    // useEffect(() => {
+    //     setTotals(shop.cartItems);
+    // }, [shop.cartItems]);
 
     // Updates totals when cart item's quantity is changed
-    const handleCartItemQuantityChanged = () => {
-        setTotals(shop.cartItems);
-    }
-
+    // const handleCartItemQuantityChanged = () => {
+    //     // shop.setTotal(shop.cartItems);
+    //     // shop.setCartItems([...shop.cartItems]);
+    // }
     const handleCheckoutAction = () => {
         if (shop.cartItems.length < 1) {
             alert('Your cart is empty!');
@@ -52,7 +44,8 @@ function Cart() {
         <div className="page margin-page" id="cart-page">
             <h1 id="cart-header">Cart</h1>
             <div id="cart">
-                <div id="cart-items" onChange={() => handleCartItemQuantityChanged()}>
+                {/* <div id="cart-items" onChange={() => handleCartItemQuantityChanged()}> */}
+                <div id="cart-items">
                     {shop.cartItems.map(
                         (item) => <CartItem item={item} key={item.cart_itemsid}/>
                     )}
@@ -60,10 +53,10 @@ function Cart() {
                 <div id="order-panel">
                     <div id="order-summary">
                         <h3>Order Summary</h3>
-                        <p>Subtotal: ${subtotal.toFixed(2)}</p>
+                        <p>Subtotal: $0.00</p>
                         <p>Promos: $0.00</p>
-                        <p>Estimated Tax: ${tax.toFixed(2)} </p>
-                        <h3>Order Total: ${total.toFixed(2)}</h3>
+                        <p>Estimated Tax: $0.00</p>
+                        <h3>Order Total: ${shop.total}</h3>
                     </div>
                     <button type="button" className="checkout-button" onClick={handleCheckoutAction}>Checkout</button>
                 </div>

@@ -69,7 +69,8 @@ function Checkout() {
 
         // Clear cart
         if (auth.auth) {
-            const clearResponse = await axios.post(`http://localhost:8800/cart_items/clear/${shop.cartsId}`);
+            const clearResponse = await axios.delete(`http://localhost:8800/cart_items/clear/${shop.cartsId}`);
+            console.log('Cleared!');
             console.log(clearResponse);
         }
         shop.clearCart();

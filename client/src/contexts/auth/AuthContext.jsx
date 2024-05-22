@@ -17,7 +17,6 @@ const AuthProvider = ({ children }) => {
                 const response = await axios.get(`http://localhost:8800/users/${id}`);
                 const userData = await response.data;
                 setUser(userData);
-                console.log(userData);
             } catch(err) {
                 console.log(err);
             }
@@ -61,9 +60,9 @@ const AuthProvider = ({ children }) => {
     }
 
     const createUserAction = async(data) => {
-        const firstName = data.firstName;
-        const lastName = data.lastName;
-        const email = data.email;
+        const firstName = data.firstName.toUpperCase();
+        const lastName = data.lastName.toUpperCase();
+        const email = data.email.toUpperCase();
         const password = data.password;
 
         try {
@@ -83,12 +82,13 @@ const AuthProvider = ({ children }) => {
                     password: password
                 },
             );
-            if (createUserResponse.status === 200) {
-                await loginAction(data);
-            } else {
+            if (createUserResponse.status !== 200) {
                 alert("Invalid Email/Password combination");
                 navigate("/login");
             }
+            await loginAction(data);
+            
+            return createUserResponse.data.usersid;
         } catch(err) {
             console.log(err);
         }

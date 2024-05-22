@@ -11,14 +11,21 @@ const ShopProvider = ({ children }) => {
     const [cartsId, setCartsId] = useState(-1);
     const [total, setTotal] = useState(0.00);
     const auth = useAuth();
+    let initializeCart;
     
     useEffect(() => {
         const fetchCart = async() => {
             if (auth.auth && auth.usersId !== -1) {
                 try {
-                    const response = await axios.get(`http://localhost:8800/carts/${auth.usersId}`);
-                    if (response.data) {
-                        setCartsId(response.data.cartsid);
+                    const fetchResponse = await axios.get(`http://localhost:8800/carts/${auth.usersId}`);
+                    if (fetchResponse.data) {
+                        setCartsId(fetchResponse.data.cartsid);
+                    } else {
+                        const createResponse = await axios.post('http://localhost:8800/carts', {usersid: auth.usersId});
+                        if (createResponse) {
+                            setCartsId(createResponse.cartsid);
+                            await initializeCart(auth.usersId);
+                        }
                     }
                 } catch(err) {
                     console.log(err);
@@ -26,7 +33,7 @@ const ShopProvider = ({ children }) => {
             }
         }
         fetchCart();
-    }, [auth.auth, auth.usersId]);
+    }, [auth.auth, auth.usersId, initializeCart]);
 
     useEffect(() => {
         const sumCartItems = () => {
@@ -39,7 +46,7 @@ const ShopProvider = ({ children }) => {
         sumCartItems();
     }, [cartItems]);
 
-    const initializeCart = async(usersId) => {
+    initializeCart = async(usersId) => {
         if (usersId !== -1) {
             try {
                 const response = await axios.get(`http://localhost:8800/carts/${usersId}`);
@@ -59,7 +66,6 @@ const ShopProvider = ({ children }) => {
         })
     }
 
-    // TODO: Rename this
     const saveCartItem = async(item, cartsId, cart) => {
         try {
             if (isInCart(item.product, item.size, cart)) {
@@ -97,18 +103,6 @@ const ShopProvider = ({ children }) => {
     }
 
     const addToCart = async(product, size) => {
-        // Create new cart if one doesn't exist TODO: Test this
-        if (auth.auth && cartsId === -1) {
-            try {
-                const response = await axios.post('http://localhost:8800/carts', {usersid: auth.usersId});
-                if (response) {
-                    setCartsId(response.cartsid);
-                }
-            } catch(err) {
-                console.log(err);
-            }
-        }
-
         let item; 
 
         if (isInCart(product, size, cartItems)) {
@@ -120,6 +114,7 @@ const ShopProvider = ({ children }) => {
                 return;
             }
             item.quantity++;
+            setCartItems([...cartItems]);
         } else {
             item = {
                 cart_itemsid: uid(),
@@ -172,7 +167,6 @@ const ShopProvider = ({ children }) => {
                 }
             )
             const responseData = response.data.map((item) => normalizeCartItem(item));
-
             const savedItems = [];
             for (const item of cartItems) {
                 const saveResponse = await saveCartItem(item, cartsId, responseData);
@@ -213,6 +207,7 @@ const ShopProvider = ({ children }) => {
 
     return (
         <ShopContext.Provider value={{ 
+            cartsId,
             cartItems,
             total,
             addToCart,
