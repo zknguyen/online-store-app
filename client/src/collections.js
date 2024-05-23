@@ -28,7 +28,7 @@ const collectionsData = [
     {
         id: uniqid(),
         name: 'Sneakers',
-        imageURL: '/products/nike-af1.webp',
+        imageURL: '/products/tnf-nupste.webp',
         collectionURL: '/products',
     },
     {

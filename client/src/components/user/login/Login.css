@@ -1,4 +1,12 @@
 /* General */
+#login-page {
+    padding: 40px 10%;
+}
+
+#login-header {
+    margin-bottom: 20px;
+}
+
 .log-in-out-button {
     color: #FFFFFF;
     background-color: #000000;
@@ -15,12 +23,16 @@
 }
 
 /* Not authenticated */
-#login-page {
-    padding: 40px 10%;
+#login-form {
+    width: 500px;
 }
 
-input {
-    margin: 5px 0;
+.input-field {
+    height: 20px;
+    border: none;
+    border-bottom: 2px solid #000000;
+    margin: 10px 0;
+    width: 100%;
 }
 
 .hidden {

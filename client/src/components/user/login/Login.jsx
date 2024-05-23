@@ -25,15 +25,15 @@ function Login() {
     // Display login
     const LoginFormDisplay = () => {
         return (
-            <div id='login-form'>
+            <div id='login-form-display'>
+                <h1 id="login-header">Log In</h1>
                 <form method="post" id="login-form" onSubmit={handleLogin}>
-                    <h1>Log In</h1>
-                    <input type="email" name="email" id="email" placeholder="Email" required/><br/>
-                    <input type="password" name="password" id="password" placeholder="Password" required/><br/>
+                    <input type="email" name="email" id="email" className="input-field" placeholder="Email" required/><br/>
+                    <input type="password" name="password" id="password" className="input-field" placeholder="Password" required/><br/>
                     <input type="submit" className="log-in-out-button" value="Log in"/>
                 </form>
                 <p>Not a member?</p>
-                <Link to="/create-user">
+                <Link to="/create-user" className='hyperlink'>
                     <p id='create-user-hyperlink'><b>Create an Account</b></p>
                 </Link>
             </div>

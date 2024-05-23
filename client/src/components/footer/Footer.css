@@ -1,7 +1,15 @@
 #footer {
+    color: #FFFFFF;
+    background-color: #000000;
     display: flex;
     height: 200px;
     padding: 50px;
     border-top: 1px solid #000000;
     justify-content: space-evenly;
+    /* position: absolute;
+    width: 100%;
+    bottom: 0; */
+    position: relative;
+    margin-top: -200px;
+    clear: both;
 }

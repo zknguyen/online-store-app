@@ -20,11 +20,11 @@ function CreateUser() {
         <div id='create-user-page'>
             <h1 id="create-user-header">Create an Account</h1>
             <form method='post' id='create-user-form' onSubmit={handleCreateUser}>
-                <input type='text' id='first-name' placeholder='First Name'/>
-                <input type='text' id='last-name' placeholder='Last Name'/>
-                <input type='text' id='email' placeholder='Email'/>
-                <input type='password' id='password' placeholder='Password'/>
-                <input type='password' id='confirm-password' placeholder='Confirm Password'/>
+                <input type='text' id='first-name' className="input-field" minLength={1} placeholder='First Name' required/>
+                <input type='text' id='last-name' className="input-field" minLength={1} placeholder='Last Name' required/>
+                <input type='text' id='email' className="input-field" placeholder='Email' required/>
+                <input type='password' id='password' className="input-field" minLength={1} placeholder='Password' required/>
+                <input type='password' id='confirm-password' className="input-field" minLength={1} placeholder='Confirm Password' required/>
                 <input type="submit" className="create-user-button" value="Create Account"/>
             </form>
         </div>

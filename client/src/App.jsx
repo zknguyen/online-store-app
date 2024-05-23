@@ -14,30 +14,33 @@ import CheckoutFinish from "./components/checkout/CheckoutFinish";
 import Footer from "./components/footer/Footer"
 import './App.css'
 
+// TODO: put container in its own component (Body/Main maybe?)
 function App() {
   return (
     <>
-          <AuthProvider>
-            <ShopProvider>
-              <Navbar/>
-              <Routes>
-                <Route index path="/" element={<Home/>}/>
-                <Route path="/login" element={<Login/>}/>
-                <Route path="/create-user" element={<CreateUser/>}/>
-                <Route path="/shop" element={<Products type="All Products"/>}/>
-                <Route path="/shop/men" element={<Products type="Men"/>}/>
-                <Route path="/shop/women" element={<Products type="Women"/>}/>
-                <Route path="/shop/kids" element={<Products type="Kids"/>}/>
-                <Route path="/shop/sale" element={<Products type="Sale"/>}/>
-                <Route path="/product/:productsid" element={<ProductDetails/>}/>
-                <Route path="/about-us" element={<AboutUs/>}/>
-                <Route path="/cart" element={<Cart/>}/>
-                <Route path="/checkout" element={<Checkout/>}/>
-                <Route path="/checkout-finish" element={<CheckoutFinish/>}/>
-              </Routes>
-              <Footer/>
-            </ShopProvider>
-          </AuthProvider>
+      <AuthProvider>
+        <ShopProvider>
+          <Navbar/>
+            <div id='container'>
+            <Routes>
+              <Route index path="/" element={<Home/>}/>
+              <Route path="/login" element={<Login/>}/>
+              <Route path="/create-user" element={<CreateUser/>}/>
+              <Route path="/shop" element={<Products type="All Products"/>}/>
+              <Route path="/shop/men" element={<Products type="Men"/>}/>
+              <Route path="/shop/women" element={<Products type="Women"/>}/>
+              <Route path="/shop/kids" element={<Products type="Kids"/>}/>
+              <Route path="/shop/sale" element={<Products type="Sale"/>}/>
+              <Route path="/product/:productsid" element={<ProductDetails/>}/>
+              <Route path="/about-us" element={<AboutUs/>}/>
+              <Route path="/cart" element={<Cart/>}/>
+              <Route path="/checkout" element={<Checkout/>}/>
+              <Route path="/checkout-finish" element={<CheckoutFinish/>}/>
+            </Routes>
+            </div>
+          <Footer/>
+        </ShopProvider>
+      </AuthProvider>
     </>
   )
 }
