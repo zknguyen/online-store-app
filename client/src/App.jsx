@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import AuthProvider from "./contexts/auth/AuthContext";
 import ShopProvider from "./contexts/shop/ShoppingCartContext";
 import Navbar from './components/navbar/Navbar'
+// import Container from "./components/components/Container";
 import Login from "./components/user/login/Login";
 import CreateUser from "./components/user/create-user/CreateUser";
 import Home from './components/home/Home'
@@ -13,6 +14,8 @@ import Checkout from "./components/checkout/Checkout";
 import CheckoutFinish from "./components/checkout/CheckoutFinish";
 import Footer from "./components/footer/Footer"
 import './App.css'
+import ScrollToTop from "./components/components/ScrollToTop";
+import Container from "./components/components/Container";
 
 // TODO: put container in its own component (Body/Main maybe?)
 function App() {
@@ -21,7 +24,8 @@ function App() {
       <AuthProvider>
         <ShopProvider>
           <Navbar/>
-            <div id='container'>
+            <ScrollToTop/>
+            <Container>
             <Routes>
               <Route index path="/" element={<Home/>}/>
               <Route path="/login" element={<Login/>}/>
@@ -37,7 +41,7 @@ function App() {
               <Route path="/checkout" element={<Checkout/>}/>
               <Route path="/checkout-finish" element={<CheckoutFinish/>}/>
             </Routes>
-            </div>
+            </Container>
           <Footer/>
         </ShopProvider>
       </AuthProvider>

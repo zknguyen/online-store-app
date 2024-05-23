@@ -5,7 +5,8 @@ import { useSessionStorage } from '../hooks/useSessionStorage';
 function CartItem({ item }) {
     const [quantity, setQuantity] = useSessionStorage(`${item.cart_itemsid}`, item.quantity);
     const shop = useShop();
-
+    // TODO: change path
+    const imageURL = `../../../public/products/${item.product.brand}-${item.product.productsid}.webp`
 
     const handleItemQuantityChanged = async(e) => {
         const updatedQuantity = e.target.value;
@@ -19,7 +20,7 @@ function CartItem({ item }) {
 
     return (
         <div className="cart-item" id={item.cartid}>
-            <img src={item.imageURL} alt={item.product.name} className="cart-item-image"></img>
+            <img src={imageURL} alt={item.product.name} className="cart-item-image"></img>
             <div className="cart-item-details">
                 <div className="cart-item-top-row">
                     <div className="item-info">

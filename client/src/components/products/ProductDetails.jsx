@@ -18,6 +18,8 @@ function ProductDetails() {
     });
     const [size, setSize] = useState("S");
     const shop = useShop();
+    // TODO: get absolute path for files
+    const imageURL = `../../../public/products/${product.brand}-${product.productsid}.webp`
     
     let handleSizeSelected;
 
@@ -59,7 +61,7 @@ function ProductDetails() {
     return (
         <div className="page margin-page" id="product-details-page">
             <div className="product-image-container">
-                <img src={product.imageURL} className="product-details-image" alt="Image Placeholder"/>
+                <img src={imageURL} className="product-details-image" alt="Image Placeholder"/>
             </div>
             <div className="product-details-container">
                 <div className="product-details-header">

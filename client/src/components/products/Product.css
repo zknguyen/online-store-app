@@ -31,13 +31,14 @@
 
     .product-card-image {
         transform: scale(1.025);
+        transition: 0.2s;
     }
 }
 
 .product-card-image {
     height: 400px;
     width: 350px;
-    border: 1px solid #000000;
+    border: none;
     align-self: center;
 }
 
@@ -54,7 +55,7 @@
 }
 
 .product-image-container {
-    border: solid 1px #000000;
+    border: none;
     margin: 0 10px;
 }
 

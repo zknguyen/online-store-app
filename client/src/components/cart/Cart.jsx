@@ -24,7 +24,7 @@ function Cart() {
             <div id='cart-empty-display'>
                 <h2>Your cart is empty</h2>
                 {auth.auth ? <></> : <><p>If you have an account, log in to see your items.</p>
-                <input type="submit" className="log-in-out-button" value="Log in"/></>}
+                <Link to="/login" className="hyperlink"><input type="submit" className="log-in-out-button" value="Log in"/></Link></>}
                 <Link to="/shop" className="hyperlink">
                     <p id='return-to-shop-hyperlink'><b>Return to Shop</b></p>
                 </Link>
