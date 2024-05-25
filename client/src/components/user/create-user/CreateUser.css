@@ -12,6 +12,24 @@
     width: 500px;
 }
 
+.input-field {
+    height: 20px;
+    border: none;
+    border-bottom: 2px solid #000000;
+    margin: 10px 0;
+    width: 100%;
+}
+
+.input-error {
+    border-bottom: 2px solid red;
+}
+
+.error {
+    color: red;
+    overflow: hidden;
+    margin-top: 0px;
+}
+
 .create-user-button {
     color: #FFFFFF;
     background-color: #000000;

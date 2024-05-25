@@ -35,6 +35,16 @@
     width: 100%;
 }
 
+.input-error {
+    border-bottom: 2px solid red;
+}
+
+.error {
+    color: red;
+    overflow: hidden;
+    margin-top: 0px;
+}
+
 .hidden {
     display: none;
 }

@@ -3,29 +3,47 @@ import "./CreateUser.css";
 
 function CreateUser() {
     const auth = useAuth();
-    // TODO: figure out how to make this less repetitive
-    const firstName = document.getElementById("first-name");
-    const lastName = document.getElementById("last-name");
-    const email = document.getElementById("email");
-    const password = document.getElementById("password");
 
-    // email.addEventListener('input', () => {
-    //     if (email.validity.valid) {
-    //         emailError.textContent = ""
-    //     } else {
-    //         if (email.validity.typeMismatch) {
-    //             emailError.textContent = "Please enter in valid email format";
-    //         }
-    //     }
-    // });
+    const handleInputChanged = (e) => {
+        const input = e.target.value;
+        const fieldName = e.target.id;
+        const inputField = document.getElementById(fieldName);
+        const error = document.getElementById(`${fieldName}-error`);
+        let invalid = false;
+        
+        if (fieldName === 'email') {
+            if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(input)) {
+                inputField.classList.add('input-error');
+                error.textContent = 'Please enter a valid email';
+                invalid = true;
+            }
+        }
+        if (fieldName === 'confirm-password') {
+            const password = document.getElementById('password').value;
+            if (input != password) {
+                inputField.classList.add('input-error');
+                error.textContent = 'Passwords must match';
+                invalid = true;
+            }
+        }
+        if (input.length < 1) {
+            inputField.classList.add('input-error');
+            error.textContent = 'Field is required';
+            invalid = true;
+        }
+        if (!invalid) {
+            inputField.classList.remove('input-error');
+            error.textContent = '';
+        }
+    }
 
     const handleCreateUser = async(e) => {
         e.preventDefault();
         const data = { 
-            firstName: firstName.value,
-            lastName: lastName.value,
-            email: email.value,
-            password: password.value,
+            firstName: document.getElementById("first-name").value,
+            lastName: document.getElementById("last-name").value,
+            email: document.getElementById("email").value,
+            password: document.getElementById("password").value,
         };
         // TODO: handle any errors
         await auth.createUserAction(data);
@@ -35,11 +53,31 @@ function CreateUser() {
         <div id='create-user-page'>
             <h1 id="create-user-header">Create an Account</h1>
             <form method='post' id='create-user-form' onSubmit={handleCreateUser}>
-                <input type='text' id='first-name' className="input-field" minLength={1} placeholder='First Name' required/>
-                <input type='text' id='last-name' className="input-field" minLength={1} placeholder='Last Name' required/>
-                <input type='email' id='email' className="input-field" placeholder='Email' required/>
-                <input type='password' id='password' className="input-field" minLength={1} placeholder='Password' required/>
-                <input type='password' id='confirm-password' className="input-field" minLength={1} placeholder='Confirm Password' required/>
+                <div className="login-input">
+                    <label htmlFor="first-name"></label>
+                    <input type='text' id='first-name' className="input-field" minLength={1} placeholder='First Name' onChange={handleInputChanged} required/>
+                    <div className="error" id="first-name-error" aria-live="polite"></div>
+                </div>
+                <div className="login-input">
+                    <label htmlFor="last-name"></label>
+                    <input type='text' id='last-name' className="input-field" minLength={1} placeholder='Last Name' onChange={handleInputChanged} required/>
+                    <div className="error" id="last-name-error" aria-live="polite"></div>
+                </div>
+                <div className="login-input">
+                    <label htmlFor="email"></label>
+                    <input type='email' id='email' className="input-field" placeholder='Email' onChange={handleInputChanged} required/>
+                    <div className="error" id="email-error" aria-live="polite"></div>
+                </div>
+                <div className="login-input">
+                    <label htmlFor="password"></label>
+                    <input type='password' id='password' className="input-field" minLength={1} placeholder='Password' onChange={handleInputChanged} required/>
+                    <div className="error" id="password-error" aria-live="polite"></div>
+                </div>
+                <div className="login-input">
+                    <label htmlFor="confirm-password"></label>
+                    <input type='password' id='confirm-password' className="input-field" minLength={1} placeholder='Confirm Password' onChange={handleInputChanged} required/>
+                    <div className="error" id="confirm-password-error" aria-live="polite"></div>
+                </div>
                 <input type="submit" className="create-user-button" value="Create Account"/>
             </form>
         </div>
