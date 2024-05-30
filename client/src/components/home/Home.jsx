@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import CollectionCard from './CollectionCard';
 import Carousel from '../components/Carousel';
-import collectionsData from '../../collections';
+import collectionsData from '../../data/collections';
 import axios from 'axios';
 import './Home.css';
 

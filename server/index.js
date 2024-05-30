@@ -281,6 +281,15 @@ app.get("/shop/sale", (req, res) => {
     });
 });
 
+app.get("/shop/search/:query", (req, res) => {
+    console.log(`QUERY: ${req.params.query}`);
+    const queryString = `SELECT * FROM products WHERE name LIKE '%${req.params.query}%'`;
+    db.query(queryString, (err, data) => {
+        if (err) return res.json(err);
+        return res.json(data);
+    });
+})
+
 app.get("/product/:productsid", (req, res) => {
     const queryString = `SELECT * FROM products WHERE productsid = ${req.params.productsid}`;
     db.query(queryString, (err, data) => {

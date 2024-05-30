@@ -138,6 +138,7 @@ const ShopProvider = ({ children }) => {
         setCartItems(cartItems.filter((cartItem) => cartItem.cart_itemsid !== item.cart_itemsid));
     };
 
+    // TODO: Find a better way to destructure this
     const normalizeCartItem = (cartItemData) => {
         return {
             cart_itemsid: cartItemData.cart_itemsid,

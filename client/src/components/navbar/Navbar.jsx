@@ -1,7 +1,39 @@
-import './Navbar.css';
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+// import axios from "axios";
+import './Navbar.css';
 
 function Navbar() {
+    const navigate = useNavigate();
+
+    document.addEventListener('click', (e) => {
+        if (e.target.id !== 'search-bar' && e.target.id !== 'search-icon') {
+            const searchIcon = document.getElementById('search-icon');
+            const searchBar = document.getElementById('search-bar');
+            searchIcon.classList.remove('hidden');
+            searchBar.classList.add('hidden');
+        }
+    })
+
+    const handleSearchClicked = () => {
+        const searchIcon = document.getElementById('search-icon');
+        const searchBar = document.getElementById('search-bar');
+        searchIcon.classList.add('hidden');
+        searchBar.classList.remove('hidden');
+    }
+
+    const handleSearchSubmitted = async(e) => {
+        // e.preventDefault();
+        const query = e.target.childNodes[0].value;
+        navigate(`/shop/search/${query}`);
+        // try {
+        //     // const response = await axios.get(`http://localhost:8800/shop/search/${query}`);
+        //     navigate(`/shop/search/${query}`);
+        // } catch(err) {
+        //     console.log(err);
+        // }
+    }
+
     return (
         <div id="navbar">
             <div id="navbar-column-1">
@@ -27,7 +59,12 @@ function Navbar() {
                 </Link>
             </div>
             <div id="navbar-column-3">
-                <i className="fa-solid fa-magnifying-glass"></i>
+                <div id="search">
+                    <form id="search-form" onSubmit={handleSearchSubmitted}>
+                        <input type="text" id="search-bar" className="hidden" placeholder="Search"/>
+                    </form>
+                    <i id="search-icon" className="fa-solid fa-magnifying-glass" onClick={handleSearchClicked}></i>
+                </div>
                 <Link to="/login">
                     <i className="fa-solid fa-user"></i>
                 </Link>

@@ -1,14 +1,20 @@
 /* Products container */
-#products-empty-text {
-    padding: 50px;
-    font-size: 36px;
+#products-page {
+    padding: 40px 2.5%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+#products-header {
+    grid-column: 1 / 6;
+    margin: 40px 0;
 }
 
 .products {
     display: grid;
+    grid-column: 2 / 6;
     grid-template-columns: repeat(auto-fill, 350px);
     height: 100%;
-    padding: 20px;
     gap: 15px;
 }
 
@@ -19,7 +25,6 @@
 }
 
 .product-card {
-    
     background-color: #FFFFFF;
     color: black;
     display: flex;

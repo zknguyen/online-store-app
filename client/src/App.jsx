@@ -2,7 +2,6 @@ import { Routes, Route } from "react-router-dom";
 import AuthProvider from "./contexts/auth/AuthContext";
 import ShopProvider from "./contexts/shop/ShoppingCartContext";
 import Navbar from './components/navbar/Navbar'
-// import Container from "./components/components/Container";
 import Login from "./components/user/login/Login";
 import CreateUser from "./components/user/create-user/CreateUser";
 import Home from './components/home/Home'
@@ -35,6 +34,7 @@ function App() {
               <Route path="/shop/women" element={<Products type="Women"/>}/>
               <Route path="/shop/kids" element={<Products type="Kids"/>}/>
               <Route path="/shop/sale" element={<Products type="Sale"/>}/>
+              <Route path="/shop/search/:query" element={<Products type="Search"/>}/>
               <Route path="/product/:productsid" element={<ProductDetails/>}/>
               <Route path="/about-us" element={<AboutUs/>}/>
               <Route path="/cart" element={<Cart/>}/>
