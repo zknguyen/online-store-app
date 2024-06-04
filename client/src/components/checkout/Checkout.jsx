@@ -1,6 +1,8 @@
 import { useAuth } from "../../contexts/auth/AuthContext";
-import { useShop } from "../../contexts/shop/ShoppingCartContext";
+import { useShop } from "../../contexts/shop/ShopContext";
+// import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import OrderItem from "./OrderItem";
 import axios from "axios";
 import './Checkout.css';
 
@@ -8,8 +10,13 @@ function Checkout() {
     const auth = useAuth();
     const shop = useShop();
     const navigate = useNavigate();
+    // const [addressData, setAddressData] = useState({
+    //     firstname: auth.user.firstname,
+    //     lastname: auth.user.lastname,
+    // })
 
     const handleCheckout = async(e) => {
+        console.log('Checking out...');
         e.preventDefault();
         let email;
         if (auth.auth) {
@@ -68,10 +75,12 @@ function Checkout() {
         })
 
         // Clear cart
+        // TODO: error handling
         if (auth.auth) {
             const clearResponse = await axios.delete(`http://localhost:8800/cart_items/clear/${shop.cartsId}`);
-            console.log('Cleared!');
-            console.log(clearResponse);
+            if (!clearResponse) {
+                console.log('Error!')
+            }
         }
         shop.clearCart();
         navigate('/checkout-finish');
@@ -89,7 +98,6 @@ function Checkout() {
     const AuthDisplay = () => {
         return (
             <>
-                <h4>Welcome back!</h4>
                 <p>Email: <b>{auth.user.email}</b></p>
             </>
         )
@@ -98,29 +106,46 @@ function Checkout() {
     return (
         <div id='checkout-page'>
             <h1 id="checkout-header">Checkout</h1>
-            <form id='checkout-user-form' onSubmit={handleCheckout}>
-                <h3>User Info</h3>
-                <div id='checkout-user-info'>
-                    {auth.auth ? <AuthDisplay/> : <GuestDisplay/>}
+            <form id='checkout-user-form'>
+                <div id="user-info" className="user-form-panel">
+                    <h3>User Info</h3>
+                    <div id='checkout-user-info'>
+                        {auth.auth ? <AuthDisplay/> : <GuestDisplay/>}
+                    </div>
                 </div>
-                <h3>Address</h3>
-                <div id='checkout-address-info'>
-                    <input type='text' id='street' placeholder='Street'/>
-                    <input type='text' id='city' placeholder='City'/>
+                <div id='checkout-address-info' className='checkout-form user-form-panel'>
+                    <h3 className="section-title full-col">Address</h3>
+                    <input type='text' id='firstname' placeholder='First Name'/>
+                    <input type='text' id='lastname' placeholder='Last Name'/>
+                    <input type='text' id='street' className='full-col' placeholder='Street'/>
+                    <input type='text' id='city' className='full-col' placeholder='City'/>
                     <input type='text' id='state' placeholder='State'/>
                     <input type='number' id='zipcode' placeholder='Zipcode'/>
                 </div>
-                <h3>Payment</h3>
-                <div id='checkout-payment-info'>
-                    <input type='text' id='name-on-card' placeholder='Name on Card'/>
-                    <input type='number' id='card-number' placeholder='Card Number'/>
+                <div id='checkout-payment-info' className='checkout-form user-form-panel'>
+                    <h3 className="section-title full-col">Payment</h3>
+                    <input type='text' id='name-on-card' className='full-col' placeholder='Name on Card'/>
+                    <input type='number' id='card-number' className='full-col' placeholder='Card Number'/>
                     <input type='date' id='card-expiration-date' placeholder='Expiration Date'/>
                     <input type='number' id='card-cvc' placeholder='CVC'/>
                 </div>
-                <button type='submit' id='checkout-place-order'>Place Your Order</button>
             </form>
+            <div id="order-summary-panel">
+                <div id="order-items">
+                {shop.cartItems.map(
+                    (item) => <OrderItem item={item} key={item.cart_itemsid}/>
+                )}
+                </div>
+                <div id="order-total">
+                    <p>Subtotal: $0.00</p>
+                    <p>Promos: $0.00</p>
+                    <p>Estimated Tax: $0.00</p>
+                    <h3>Order Total: ${shop.total}</h3>
+                </div>
+                <button type='submit' id='place-order-button' onClick={handleCheckout}>Place Your Order</button>
+            </div>
         </div>
     )
 }
 
-export default Checkout
+export default Checkout;

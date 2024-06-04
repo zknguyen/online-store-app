@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from "react";
 import "./Product.css";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { useShop } from "../../contexts/shop/ShoppingCartContext";
+import { useShop } from "../../contexts/shop/ShopContext";
 
 function ProductDetails() {
     const id = useParams().productsid;

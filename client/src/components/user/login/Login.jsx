@@ -1,6 +1,7 @@
 import { useAuth } from "../../../contexts/auth/AuthContext";
-import { useShop } from "../../../contexts/shop/ShoppingCartContext";
+import { useShop } from "../../../contexts/shop/ShopContext";
 import { Link } from "react-router-dom";
+import UserProfile from "../user-profile/UserProfile";
 import "./Login.css";
 
 function Login() {
@@ -42,10 +43,10 @@ function Login() {
         await shop.initializeCart(usersId);
     }
 
-    const handleLogOut = async() => {
-        shop.clearCart();
-        await auth.logoutAction();
-    }
+    // const handleLogOut = async() => {
+    //     shop.clearCart();
+    //     await auth.logoutAction();
+    // }
 
     // Display login
     const LoginFormDisplay = () => {
@@ -73,40 +74,40 @@ function Login() {
         )
     }
 
-    const LoggedInDisplay = () => {
-        return (
-            <div id="logged-in-display">
-                <h1>Welcome, {auth.user.firstname} {auth.user.lastname}!</h1>
-                <div id="grid-container">
-                    <div id="account-details" className="detail-container">
-                        <h2 className="detail-container-header">Account</h2>
-                        <h6 className="field-header">First Name</h6>
-                        <h4 className="field-entry">{auth.user.firstname}</h4>
-                        <h6 className="field-header">Last Name</h6>
-                        <h4 className="field-entry">{auth.user.lastname}</h4>
-                        <h6 className="field-header">Email</h6>
-                        <h4 className="field-entry">{auth.user.email}</h4>
-                        <h6 className="field-header">Password</h6>
-                        <h4 className="field-entry">********</h4>
-                        <button type="button" className="log-in-out-button" onClick={handleLogOut}>Log out</button>
-                    </div>
-                    <div id="address-details" className="detail-container">
-                        <h2 className="detail-container-header">Address</h2>
-                    </div>
-                    <div id="payment-details" className="detail-container">
-                        <h2 className="detail-container-header">Payment</h2>
-                    </div>
-                    <div id="collection-details" className="detail-container">
-                        <h2 className="detail-container-header">Collections</h2>
-                    </div>
-                </div>
-            </div>
-        )
-    }
+    // const LoggedInDisplay = () => {
+    //     return (
+    //         <div id="logged-in-display">
+    //             <h1>Welcome, {auth.user.firstname} {auth.user.lastname}!</h1>
+    //             <div id="grid-container">
+    //                 <div id="account-details" className="detail-container">
+    //                     <h2 className="detail-container-header">Account</h2>
+    //                     <h6 className="field-header">First Name</h6>
+    //                     <h4 className="field-entry">{auth.user.firstname}</h4>
+    //                     <h6 className="field-header">Last Name</h6>
+    //                     <h4 className="field-entry">{auth.user.lastname}</h4>
+    //                     <h6 className="field-header">Email</h6>
+    //                     <h4 className="field-entry">{auth.user.email}</h4>
+    //                     <h6 className="field-header">Password</h6>
+    //                     <h4 className="field-entry">********</h4>
+    //                     <button type="button" className="log-in-out-button" onClick={handleLogOut}>Log out</button>
+    //                 </div>
+    //                 <div id="address-details" className="detail-container">
+    //                     <h2 className="detail-container-header">Address</h2>
+    //                 </div>
+    //                 <div id="payment-details" className="detail-container">
+    //                     <h2 className="detail-container-header">Payment</h2>
+    //                 </div>
+    //                 <div id="orders-details" className="detail-container">
+    //                     <h2 className="detail-container-header">Orders</h2>
+    //                 </div>
+    //             </div>
+    //         </div>
+    //     )
+    // }
 
     return (
         <div id="login-page">
-            {auth.auth ? <LoggedInDisplay/> : <LoginFormDisplay/>}
+            {auth.auth ? <UserProfile/> : <LoginFormDisplay/>}
         </div>
     )
 }

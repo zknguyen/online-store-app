@@ -282,7 +282,6 @@ app.get("/shop/sale", (req, res) => {
 });
 
 app.get("/shop/search/:query", (req, res) => {
-    console.log(`QUERY: ${req.params.query}`);
     const queryString = `SELECT * FROM products WHERE name LIKE '%${req.params.query}%'`;
     db.query(queryString, (err, data) => {
         if (err) return res.json(err);
@@ -372,6 +371,14 @@ app.post("/orders", (req, res) => {
     });
 });
 
+app.post("/orders/search", (req, res) => {
+    const queryString = `SELECT * FROM orders WHERE email = '${req.body.email}'`;
+    db.query(queryString, (err, data) => {
+        if (err) return res.json(err);
+        return res.json(data);
+    });
+})
+
 app.post("/order_items", (req, res) => {
     const queryString = `
         INSERT INTO order_items (ordersid, productsid, size, quantity)
@@ -382,6 +389,14 @@ app.post("/order_items", (req, res) => {
             ${req.body.quantity}
         )
     `
+    db.query(queryString, (err, data) => {
+        if (err) return res.json(err);
+        return res.json(data);
+    });
+})
+
+app.get("/order_items/:ordersid", (req, res) => {
+    const queryString = `SELECT * FROM order_items WHERE ordersid = ${req.params.ordersid}`;
     db.query(queryString, (err, data) => {
         if (err) return res.json(err);
         return res.json(data);

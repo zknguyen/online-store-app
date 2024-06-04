@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/auth/AuthContext";
-import { useShop } from '../../contexts/shop/ShoppingCartContext';
+import { useShop } from '../../contexts/shop/ShopContext';
 import { Link } from "react-router-dom";
 import CartItem from './CartItem';
 import './Cart.css'

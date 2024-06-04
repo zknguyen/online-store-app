@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import AuthProvider from "./contexts/auth/AuthContext";
-import ShopProvider from "./contexts/shop/ShoppingCartContext";
+import ShopProvider from "./contexts/shop/ShopContext";
 import Navbar from './components/navbar/Navbar'
 import Login from "./components/user/login/Login";
 import CreateUser from "./components/user/create-user/CreateUser";

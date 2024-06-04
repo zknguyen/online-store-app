@@ -1,12 +1,11 @@
 import './Cart.css'
-import { useShop } from '../../contexts/shop/ShoppingCartContext';
+import { useShop } from '../../contexts/shop/ShopContext';
 import { useSessionStorage } from '../hooks/useSessionStorage';
 
 function CartItem({ item }) {
     const [quantity, setQuantity] = useSessionStorage(`${item.cart_itemsid}`, item.quantity);
     const shop = useShop();
-    // TODO: change path
-    const imageURL = `../../../public/products/${item.product.brand}-${item.product.productsid}.webp`
+    const imageURL = `/products/${item.product.brand}-${item.product.productsid}.webp`
 
     const handleItemQuantityChanged = async(e) => {
         const updatedQuantity = e.target.value;

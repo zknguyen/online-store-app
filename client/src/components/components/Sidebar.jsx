@@ -11,19 +11,30 @@ function Dropdown({ category, values }) {
         }
     }
 
-    const handleChildElementClicked = (e) => {
-        e.stopPropagation();
+    const handleCheckboxChecked = (e) => {
+        const target = e.target;
+        console.log(target);
     }
-    // TODO: merge all these somehow
+
+    // TODO: Move hidden components into a function
     return (
         <>
         <div className="dropdown" onClick={handleDropdownSelected}>
-            <h3 className="dropdown-category" onClick={handleChildElementClicked}>{category}</h3>
-            <i className="fa-solid fa-chevron-down" onClick={handleChildElementClicked}/>
-            <i className="fa-solid fa-chevron-up hidden" onClick={handleChildElementClicked}/>
+            <h3 className="dropdown-category">{category}</h3>
+            <i className="fa-solid fa-chevron-down arrow-icon"/>
+            <i className="fa-solid fa-chevron-up arrow-icon hidden"/>
         </div>
         <div className="values hidden">
-            {values.map((value) => <p key={value} className="dropdown-values">{value}</p>)}
+            {values.map((value) => {
+                return (
+                <div id="dropdown-selection" key={value}>
+                    <label htmlFor={value} className="checkbox-label">
+                        <input type="checkbox" name="checkbox" id={value} className="checkbox" onChange={handleCheckboxChecked}/>
+                        {value}
+                    </label>
+                </div>
+                )
+            })}
         </div>
         </>
     )
